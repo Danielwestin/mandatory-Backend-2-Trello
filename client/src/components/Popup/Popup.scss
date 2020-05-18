@@ -1,0 +1,29 @@
+.Popup__background {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.6);
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.Popup {
+		position: absolute;
+		width: 500px;
+		height: 500px;
+		background-color: orange;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		form {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+	}
+}
