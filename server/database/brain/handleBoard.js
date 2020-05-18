@@ -42,7 +42,7 @@ exports.updateTask = (task, taskID, boardID, res) => {
 		(task) => task.id === taskID
 	);
 
-	if (!theTaskIdx === -1) {
+	if (theTaskIdx === -1) {
 		res.status(400).end();
 	}
 
