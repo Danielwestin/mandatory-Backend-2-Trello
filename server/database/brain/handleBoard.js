@@ -32,21 +32,23 @@ exports.getTasks = (id) => {
 };
 
 exports.updateTask = (task, taskID, boardID, res) => {
-	const boardIdx = boards.entries.findIndex((board) => board.id === boardID);
+	const boardIndex = boards.entries.findIndex(
+		(board) => board.id === boardID
+	);
 
-	if (boardIdx === -1) {
+	if (boardIndex === -1) {
 		res.status(400).end();
 	}
 
-	const theTaskIdx = boards.entries[boardIdx].tasks.findIndex(
+	const taskIndex = boards.entries[boardIndex].tasks.findIndex(
 		(task) => task.id === taskID
 	);
 
-	if (theTaskIdx === -1) {
+	if (taskIndex === -1) {
 		res.status(400).end();
 	}
 
-	boards.entries[boardIdx].tasks[theTaskIdx] = task;
+	boards.entries[boardIndex].tasks[taskIndex] = task;
 	save(boards);
 };
 
@@ -59,4 +61,26 @@ exports.deleteBoard = (id) => {
 	} else {
 		console.log('Already gone!');
 	}
+};
+
+exports.deleteTask = (boardID, taskID, res) => {
+	const boardIndex = boards.entries.findIndex(
+		(board) => board.id === boardID
+	);
+
+	if (boardIndex === -1) {
+		res.status(400).end();
+	}
+
+	const taskIndex = boards.entries[boardIndex].tasks.findIndex(
+		(task) => task.id === taskID
+	);
+
+	if (taskIndex === -1) {
+		res.status(400).end();
+	}
+
+	boards.entries[boardIndex].tasks.splice(taskIndex, 1);
+	save(boards);
+	res.status(200).end();
 };

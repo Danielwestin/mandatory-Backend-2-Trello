@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import FocusTrap from 'focus-trap-react';
 
-export default function Popup({ task, setTaskInfo, board }) {
+export default function Popup({ task, taskInfo, setTaskInfo, board }) {
 	const [ updateTask, setUpdateTask ] = useState({
 		name: task.name,
 		description: task.description,
@@ -33,34 +34,38 @@ export default function Popup({ task, setTaskInfo, board }) {
 		}
 	};
 	return ReactDOM.createPortal(
-		<div className="Popup__background">
-			<div className="Popup">
-				<button onClick={() => setTaskInfo(false)}>Exit</button>
-				<p>Task ID: {task.id}</p>
+		<FocusTrap active={taskInfo}>
+			<div className="Popup__background">
+				<div className="Popup">
+					<button onClick={() => setTaskInfo(false)}>Exit</button>
+					<p>Task ID: {task.id}</p>
 
-				<form onSubmit={send}>
-					<input
-						type="text"
-						placeholder={task.name}
-						name="name"
-						onChange={set}
-						value={updateTask.name}
-					/>
-					<textarea
-						name="description"
-						placeholder={task.description}
-						onChange={set}
-						value={updateTask.description}
-						rows="10"
-						cols="53"
-					/>
-					<button type="submit">Send</button>
-				</form>
+					<form onSubmit={send}>
+						<input
+							type="text"
+							placeholder={task.name}
+							name="name"
+							onChange={set}
+							value={updateTask.name}
+							autoFocus
+						/>
 
-				<p>Created: {task.created}</p>
-				<p>Board ID: {board.id}</p>
+						<textarea
+							name="description"
+							placeholder={task.description}
+							onChange={set}
+							value={updateTask.description}
+							rows="10"
+							cols="53"
+						/>
+						<button type="submit">Send</button>
+					</form>
+
+					<p>Created: {task.created}</p>
+					<p>Board ID: {board.id}</p>
+				</div>
 			</div>
-		</div>,
+		</FocusTrap>,
 		document.querySelector('body')
 	);
 }

@@ -30,6 +30,19 @@ const Board = ({ board, deleteBoard }) => {
 				console.log(error);
 			});
 	};
+
+	const deleteTask = (boardID, taskID, e) => {
+		e.preventDefault();
+		axios
+			.delete(`/board/${boardID}/task/${taskID}`)
+			.then((response) => {
+				console.log(response);
+				setTasks(tasks.filter((task) => task.id !== taskID));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 	return (
 		<div className="Board">
 			<p> {board.name} </p>
@@ -37,7 +50,12 @@ const Board = ({ board, deleteBoard }) => {
 
 			<ul className="Board__ul__tasks">
 				{tasks.map((task) => (
-					<Task key={task.created} task={task} board={board} />
+					<Task
+						key={task.created}
+						task={task}
+						board={board}
+						deleteTask={deleteTask}
+					/>
 				))}
 			</ul>
 

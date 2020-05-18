@@ -4,12 +4,26 @@
 	border-radius: 10px;
 	background-color: rgb(180, 93, 180);
 	margin-bottom: 5px;
-
-	cursor: pointer;
 	display: flex;
 	align-items: center;
+	justify-content: space-evenly;
 
-	p {
-		padding-left: 15px;
+	&__name {
+		width: 70%;
+		height: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+
+		p {
+			padding-left: 15px;
+		}
+	}
+
+	&__divider {
+		width: 1px;
+		height: 60%;
+		background-color: black;
+		border-radius: 30%;
 	}
 }

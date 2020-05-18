@@ -32,19 +32,19 @@ app.use((req, res, next) => {
 	}
 });
 
-app.use((req, res, next) => {
-	let before = Date.now();
-	res.once('finish', () => {
-		let after = Date.now();
-		console.log(
-			res.statusCode,
-			req.method,
-			req.path,
-			after - before + 'ms'
-		);
-	});
-	next();
-});
+// app.use((req, res, next) => {
+// 	let before = Date.now();
+// 	res.once('finish', () => {
+// 		let after = Date.now();
+// 		console.log(
+// 			res.statusCode,
+// 			req.method,
+// 			req.path,
+// 			after - before + 'ms'
+// 		);
+// 	});
+// 	next();
+// });
 
 app.get('/boards', (req, res) => {
 	res.status(200).json(Boards.getBoards());
@@ -116,6 +116,13 @@ app.delete('/board/:id', async (req, res) => {
 	} catch (error) {
 		res.status(500).end();
 	}
+});
+
+app.delete('/board/:boardID/task/:taskID', (req, res) => {
+	const boardID = req.params.boardID;
+	const taskID = req.params.taskID;
+
+	Boards.deleteTask(boardID, taskID, res);
 });
 
 app.put('/board/:boardID/task/:taskID', (req, res) => {
