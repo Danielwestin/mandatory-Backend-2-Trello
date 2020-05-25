@@ -118,3 +118,25 @@ exports.deleteTask = (boardID, taskID, res) => {
 			res.status(500).end();
 		});
 };
+
+exports.moveTask = (fromBoardId, toBoardId, task, res) => {
+	const fromBoardIndex = boards.entries.findIndex(
+		(fromBoard) => fromBoard.id === fromBoardId
+	);
+
+	if (fromBoardIndex === -1) {
+		res.status(400).end();
+	}
+
+	const taskIndex = boards.entries[fromBoardIndex].tasks.findIndex(
+		(item) => item.id === task.id
+	);
+
+	if (taskIndex === -1) {
+		res.status(400).end();
+	}
+
+	const toBoardIndex = boards.entries.findIndex(
+		(toBoard) => toBoard.id === toBoardId
+	);
+};
