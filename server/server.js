@@ -73,8 +73,7 @@ app.post('/create', (req, res) => {
 			res.status(201).json(board);
 
 			break;
-		case 'task':
-			break;
+
 		default:
 			res.status(400).send('incorrect querystring');
 	}
@@ -103,7 +102,7 @@ app.post('/board/:id', (req, res) => {
 		id: uuid()
 	};
 
-	Boards.saveTasks(id, task);
+	Boards.saveTasks(id, task, res);
 	res.status(201).send(task);
 });
 
@@ -111,7 +110,7 @@ app.delete('/board/:id', async (req, res) => {
 	const id = req.params.id;
 
 	try {
-		Boards.deleteBoard(id);
+		Boards.deleteBoard(id, res);
 		res.status(204).end();
 	} catch (error) {
 		res.status(500).end();
@@ -123,6 +122,11 @@ app.delete('/board/:boardID/task/:taskID', (req, res) => {
 	const taskID = req.params.taskID;
 
 	Boards.deleteTask(boardID, taskID, res);
+});
+
+app.put('/task/:id', (req, res) => {
+	console.log(req.params.id);
+	console.log(req.body.board);
 });
 
 app.put('/board/:boardID/task/:taskID', (req, res) => {

@@ -6,9 +6,14 @@ exports.boards = {
 };
 
 exports.save = ({ entries, path }) => {
-	fs.writeFile(path, JSON.stringify(entries), (error) => {
-		if (error) {
-			console.log(error, 'eroor in fs');
-		}
+	return new Promise((resolve, reject) => {
+		fs.writeFile(path, JSON.stringify(entries), (error) => {
+			if (error) {
+				console.log(error, 'eroor in fs');
+				reject(err);
+			} else {
+				resolve();
+			}
+		});
 	});
 };

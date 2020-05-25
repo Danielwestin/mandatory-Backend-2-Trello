@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
 import Popup from '../Popup/Popup';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from '../../utilities/util';
 
 export default function Task({ task, board, deleteTask }) {
 	const [ taskInfo, setTaskInfo ] = useState(false);
+
+	const [ { isDragging }, dragRef ] = useDrag({
+		item: {
+			type: ItemTypes.TASK,
+			task: task
+			// name: task.name,
+			// description: task.description,
+			// id: task.id,
+			// created: task.created
+		},
+		collect: (monitor) => ({
+			isDragging: !!monitor.isDragging()
+		})
+	});
 
 	return (
 		<React.Fragment>
@@ -14,15 +30,24 @@ export default function Task({ task, board, deleteTask }) {
 					board={board}
 				/>
 			)}
-			<li className="Task__li">
-				<div
-					className="Task__li__name"
-					onClick={() => setTaskInfo(true)}
-				>
-					<p>{task.name}</p>
+			<li
+				className="Task__li"
+				ref={dragRef}
+				style={{ backgroundColor: isDragging && 'red' }}
+			>
+				<div className="Task__li__wrapper">
+					<div
+						className="Task__li__wrapper__name"
+						onClick={() => setTaskInfo(true)}
+					>
+						<p>{task.name}</p>
+					</div>
 				</div>
 				<div className="Task__li__divider" />
-				<button onClick={(e) => deleteTask(board.id, task.id, e)}>
+				<button
+					className="Task__li__button"
+					onClick={(e) => deleteTask(board.id, task.id, e)}
+				>
 					Remove
 				</button>
 			</li>

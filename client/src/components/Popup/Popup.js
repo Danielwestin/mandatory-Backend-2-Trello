@@ -37,8 +37,9 @@ export default function Popup({ task, taskInfo, setTaskInfo, board }) {
 		<FocusTrap active={taskInfo}>
 			<div className="Popup__background">
 				<div className="Popup">
-					<button onClick={() => setTaskInfo(false)}>Exit</button>
-					<p>Task ID: {task.id}</p>
+					<div className="Popup__exit">
+						<button onClick={() => setTaskInfo(false)}>Exit</button>
+					</div>
 
 					<form onSubmit={send}>
 						<input
@@ -62,6 +63,7 @@ export default function Popup({ task, taskInfo, setTaskInfo, board }) {
 					</form>
 
 					<p>Created: {task.created}</p>
+					<p>Task ID: {task.id}</p>
 					<p>Board ID: {board.id}</p>
 				</div>
 			</div>

@@ -4,6 +4,12 @@ exports.getBoards = () => {
 	return boards.entries;
 };
 
+exports.getTasks = (id) => {
+	const board = boards.entries.find((board) => board.id === id);
+
+	return board.tasks;
+};
+
 exports.save = (board, res) => {
 	const exists = boards.entries.find(({ name }) => name === board.name);
 
@@ -12,23 +18,31 @@ exports.save = (board, res) => {
 		res.status(406).end();
 	} else {
 		boards.entries.push(board);
-		save(boards);
+		save(boards)
+			.then(() => {
+				res.status(201).end();
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(500).end();
+			});
 	}
 };
 
-exports.saveTasks = (id, task) => {
+exports.saveTasks = (id, task, res) => {
 	const idx = boards.entries.findIndex((board) => board.id === id);
 
 	if (idx !== -1) {
 		boards.entries[idx].tasks.push(task);
-		save(boards);
+		save(boards)
+			.then(() => {
+				res.status(200).end();
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(500).end();
+			});
 	}
-};
-
-exports.getTasks = (id) => {
-	const board = boards.entries.find((board) => board.id === id);
-
-	return board.tasks;
 };
 
 exports.updateTask = (task, taskID, boardID, res) => {
@@ -49,15 +63,29 @@ exports.updateTask = (task, taskID, boardID, res) => {
 	}
 
 	boards.entries[boardIndex].tasks[taskIndex] = task;
-	save(boards);
+	save(boards)
+		.then(() => {
+			res.status(200).end();
+		})
+		.catch((error) => {
+			console.log(error);
+			res.status(500).end();
+		});
 };
 
-exports.deleteBoard = (id) => {
+exports.deleteBoard = (id, res) => {
 	const boardIndex = boards.entries.findIndex((board) => board.id === id);
 
 	if (boardIndex !== -1) {
 		boards.entries.splice(boardIndex, 1);
-		save(boards);
+		save(boards)
+			.then(() => {
+				res.status(200).end();
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(500).end();
+			});
 	} else {
 		console.log('Already gone!');
 	}
@@ -81,6 +109,12 @@ exports.deleteTask = (boardID, taskID, res) => {
 	}
 
 	boards.entries[boardIndex].tasks.splice(taskIndex, 1);
-	save(boards);
-	res.status(200).end();
+	save(boards)
+		.then(() => {
+			res.status(204).end();
+		})
+		.catch((error) => {
+			console.log(error);
+			res.status(500).end();
+		});
 };

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Board from '../Board/Board';
 import axios from 'axios';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export default function Trello() {
 	const [ boardname, setBoardname ] = useState('');
@@ -64,24 +66,30 @@ export default function Trello() {
 
 	return (
 		<React.Fragment>
-			<header className="Trello__header">
-				<h2>Trello</h2>
-				<form onSubmit={submit}>
-					<input
-						type="text"
-						placeholder="Boardname"
-						value={boardname}
-						onChange={set}
-					/>
-					<button type="submit">Create</button>
-				</form>
-				<button onClick={send}>Click</button>
-			</header>
-			<main className="Trello__main">
-				{boards.map((board, i) => (
-					<Board key={i} board={board} deleteBoard={deleteBoard} />
-				))}
-			</main>
+			<DndProvider backend={HTML5Backend}>
+				<header className="Trello__header">
+					<h2>Trello</h2>
+					<form onSubmit={submit}>
+						<input
+							type="text"
+							placeholder="Boardname"
+							value={boardname}
+							onChange={set}
+						/>
+						<button type="submit">Create</button>
+					</form>
+					<button onClick={send}>Click</button>
+				</header>
+				<main className="Trello__main">
+					{boards.map((board, i) => (
+						<Board
+							key={i}
+							board={board}
+							deleteBoard={deleteBoard}
+						/>
+					))}
+				</main>
+			</DndProvider>
 		</React.Fragment>
 	);
 }

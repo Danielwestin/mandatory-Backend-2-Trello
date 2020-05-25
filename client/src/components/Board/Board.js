@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Task from '../Task/Task';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../../utilities/util';
 
 const Board = ({ board, deleteBoard }) => {
 	const [ tasks, setTasks ] = useState([]);
+
+	const [ { isOver }, dropRef ] = useDrop({
+		accept: ItemTypes.TASK,
+		drop: (item, monitor) => moveTask(item.task.id, item.task),
+
+		collect: (monitor) => ({
+			isOver: !!monitor.isOver()
+		})
+	});
+
+	const moveTask = (id, task) => {
+		axios.put(`/task/${id}`, { task, board: board.id });
+		// const item = tasks.filter((task, id) => task.id !== id);
+
+		// setTasks(tasks.filter((task, id) => task.id !== id).concat(item));
+	};
 
 	useEffect(
 		() => {
@@ -45,10 +63,14 @@ const Board = ({ board, deleteBoard }) => {
 	};
 	return (
 		<div className="Board">
-			<p> {board.name} </p>
-			<p> {board.id} </p>
+			<p>Name: {board.name} </p>
+			<p>Board ID: {board.id} </p>
 
-			<ul className="Board__ul__tasks">
+			<ul
+				className="Board__ul__tasks"
+				ref={dropRef}
+				style={{ backgroundColor: isOver && 'yellow' }}
+			>
 				{tasks.map((task) => (
 					<Task
 						key={task.created}
@@ -60,8 +82,11 @@ const Board = ({ board, deleteBoard }) => {
 			</ul>
 
 			<div className="Board__buttons">
-				<button onClick={postTask}>New Task</button>
+				<button className="Board__buttons__newTask" onClick={postTask}>
+					New Task
+				</button>
 				<button
+					className="Board__buttons__deleteTask"
 					onClick={(e) => {
 						deleteBoard(board.id, e);
 					}}
