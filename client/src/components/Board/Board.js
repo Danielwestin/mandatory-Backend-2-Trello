@@ -22,11 +22,11 @@ const Board = ({ board, deleteBoard }) => {
 				board: toBoard
 			})
 			.then((response) => {
-				console.log(response);
+				console.log('Det funkar ju', response);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
-		// const item = tasks.filter((task, id) => task.id !== id);
-
-		// setTasks(tasks.filter((task, id) => task.id !== id).concat(item));
 	};
 
 	useEffect(
@@ -40,7 +40,7 @@ const Board = ({ board, deleteBoard }) => {
 					console.log(error);
 				});
 		},
-		[ board ]
+		[ board, moveTask ]
 	);
 
 	const postTask = (e) => {

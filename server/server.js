@@ -136,6 +136,7 @@ app.patch('/board/:boardId/task/:taskId', (req, res) => {
 	// console.log('Detta är idet på borden man ska posta till', req.body.board);
 
 	Boards.moveTask(fromBoardId, toBoardId, task, res);
+	res.status(200).send(task);
 });
 
 app.put('/board/:boardID/task/:taskID', (req, res) => {

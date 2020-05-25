@@ -139,4 +139,15 @@ exports.moveTask = (fromBoardId, toBoardId, task, res) => {
 	const toBoardIndex = boards.entries.findIndex(
 		(toBoard) => toBoard.id === toBoardId
 	);
+
+	boards.entries[fromBoardIndex].tasks.splice(taskIndex, 1);
+	boards.entries[toBoardIndex].tasks.push(task);
+	save(boards)
+		.then(() => {
+			res.status(200).end();
+		})
+		.catch((error) => {
+			console.log(error);
+			res.status(500).end();
+		});
 };
