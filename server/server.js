@@ -124,9 +124,11 @@ app.delete('/board/:boardID/task/:taskID', (req, res) => {
 	Boards.deleteTask(boardID, taskID, res);
 });
 
-app.put('/task/:id', (req, res) => {
-	console.log(req.params.id);
-	console.log(req.body.board);
+app.post('/board/:boardId/task/:taskId', (req, res) => {
+	// console.log('IDET PÅ BOARDEN TASKET ÄR PÅ', req.params.boardId);
+	// console.log('IDET PÅ TASKET', req.params.taskId);
+	// console.log('Detta är tasket', req.body.task);
+	// console.log('Detta är idet på borden man ska posta till', req.body.board);
 });
 
 app.put('/board/:boardID/task/:taskID', (req, res) => {

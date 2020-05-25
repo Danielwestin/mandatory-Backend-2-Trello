@@ -9,15 +9,25 @@ const Board = ({ board, deleteBoard }) => {
 
 	const [ { isOver }, dropRef ] = useDrop({
 		accept: ItemTypes.TASK,
-		drop: (item, monitor) => moveTask(item.task.id, item.task),
+		drop: (item, monitor) =>
+			console.log(
+				item.task,
+				'Detta är boardet tasken kommer ifrån =>',
+				item.board.id,
+				'detta är tasket dropas i =>',
+				board.id
+			),
 
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver()
 		})
 	});
 
-	const moveTask = (id, task) => {
-		axios.put(`/task/${id}`, { task, board: board.id });
+	const moveTask = (task, board) => {
+		axios.post(`/board/${board.id}/task/${task.id}`, {
+			task,
+			board: board.id
+		});
 		// const item = tasks.filter((task, id) => task.id !== id);
 
 		// setTasks(tasks.filter((task, id) => task.id !== id).concat(item));

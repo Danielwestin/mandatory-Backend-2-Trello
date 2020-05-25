@@ -9,7 +9,8 @@ export default function Task({ task, board, deleteTask }) {
 	const [ { isDragging }, dragRef ] = useDrag({
 		item: {
 			type: ItemTypes.TASK,
-			task: task
+			task,
+			board
 			// name: task.name,
 			// description: task.description,
 			// id: task.id,
