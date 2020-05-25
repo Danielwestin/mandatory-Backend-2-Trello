@@ -124,21 +124,17 @@ exports.moveTask = (fromBoardId, toBoardId, task, res) => {
 		(fromBoard) => fromBoard.id === fromBoardId
 	);
 
-	if (fromBoardIndex === -1) {
-		res.status(400).end();
-	}
-
 	const taskIndex = boards.entries[fromBoardIndex].tasks.findIndex(
 		(item) => item.id === task.id
 	);
 
-	if (taskIndex === -1) {
-		res.status(400).end();
-	}
-
 	const toBoardIndex = boards.entries.findIndex(
 		(toBoard) => toBoard.id === toBoardId
 	);
+
+	if (toBoardIndex === -1 || taskIndex === -1 || fromBoardIndex === -1) {
+		res.status(400).end();
+	}
 
 	boards.entries[fromBoardIndex].tasks.splice(taskIndex, 1);
 	boards.entries[toBoardIndex].tasks.push(task);
