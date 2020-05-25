@@ -40,7 +40,7 @@ const Board = ({ board, deleteBoard }) => {
 					console.log(error);
 				});
 		},
-		[ board, moveTask ]
+		[ board, tasks ]
 	);
 
 	const postTask = (e) => {
@@ -75,7 +75,7 @@ const Board = ({ board, deleteBoard }) => {
 			<ul
 				className="Board__ul__tasks"
 				ref={dropRef}
-				style={{ backgroundColor: isOver && 'yellow' }}
+				style={{ backgroundColor: isOver && '#e6c029' }}
 			>
 				{tasks.map((task) => (
 					<Task

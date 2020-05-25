@@ -1,6 +1,6 @@
 .Board {
 	width: 300px;
-	min-height: 200px;
+
 	background-color: rgba(61, 62, 62, 0.8);
 	// background-color: rgba(40, 41, 41, 0.8);
 	margin: 5px;
@@ -15,7 +15,6 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-
 		list-style: none;
 	}
 
@@ -37,6 +36,10 @@
 			border-radius: 5px;
 			border: solid 1px rgb(125, 125, 125);
 			color: rgb(252, 253, 254);
+		}
+
+		&__newTask:hover {
+			background-color: rgba(40, 41, 41, 0.4);
 		}
 
 		&__deleteTask:hover {

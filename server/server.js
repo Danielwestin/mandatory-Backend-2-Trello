@@ -63,7 +63,6 @@ app.post('/create', (req, res) => {
 		case 'board':
 			const board = {
 				name: req.body.boardname,
-				// name: 'Change Name',
 				id: uuid(),
 				tasks: []
 			};

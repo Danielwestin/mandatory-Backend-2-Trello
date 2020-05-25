@@ -34,7 +34,7 @@ export default function Task({ task, board, deleteTask }) {
 			<li
 				className="Task__li"
 				ref={dragRef}
-				style={{ backgroundColor: isDragging && 'red' }}
+				style={{ opacity: isDragging ? 0.2 : 1 }}
 			>
 				<div className="Task__li__wrapper">
 					<div

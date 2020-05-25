@@ -22,19 +22,6 @@ export default function Trello() {
 		setBoardname(e.target.value);
 	};
 
-	const send = (e) => {
-		e.preventDefault();
-		axios
-			.post('/create?type=board')
-			.then((response) => {
-				console.log(response.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		setBoardname('');
-	};
-
 	const submit = (e) => {
 		e.preventDefault();
 		axios
@@ -69,16 +56,17 @@ export default function Trello() {
 			<DndProvider backend={HTML5Backend}>
 				<header className="Trello__header">
 					<h2>Trello</h2>
-					<form onSubmit={submit}>
-						<input
-							type="text"
-							placeholder="Boardname"
-							value={boardname}
-							onChange={set}
-						/>
-						<button type="submit">Create</button>
-					</form>
-					<button onClick={send}>Click</button>
+					<div className="Trello__header__form">
+						<form onSubmit={submit}>
+							<input
+								type="text"
+								placeholder="Enter a name for your board"
+								value={boardname}
+								onChange={set}
+							/>
+							<button type="submit">Create</button>
+						</form>
+					</div>
 				</header>
 				<main className="Trello__main">
 					{boards.map((board, i) => (
