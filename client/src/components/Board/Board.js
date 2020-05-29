@@ -11,7 +11,7 @@ const Board = ({ board, deleteBoard }) => {
 		accept: ItemTypes.TASK,
 		drop: (item, monitor) => moveTask(item.task, item.board.id, board.id),
 		collect: (monitor) => ({
-			isOver: !!monitor.isOver()
+			isOver: monitor.isOver()
 		})
 	});
 

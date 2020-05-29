@@ -17,7 +17,7 @@ export default function Task({ task, board, deleteTask }) {
 			// created: task.created
 		},
 		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging()
+			isDragging: monitor.isDragging()
 		})
 	});
 
