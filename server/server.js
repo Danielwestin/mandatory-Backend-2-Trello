@@ -4,10 +4,9 @@ const app = express();
 const uuid = require('uuid').v4;
 // const http = require('http').createServer(app);
 
-const config = require('./config.json');
-const Boards = require('./database/brain/handleBoard');
+const port = require('./config.sample.json').port || 9999;
+const Boards = require('./database/BigBrain/handleBoard');
 
-const port = config.port;
 // app.use(express.json());
 
 app.use((req, res, next) => {
@@ -32,19 +31,19 @@ app.use((req, res, next) => {
 	}
 });
 
-// app.use((req, res, next) => {
-// 	let before = Date.now();
-// 	res.once('finish', () => {
-// 		let after = Date.now();
-// 		console.log(
-// 			res.statusCode,
-// 			req.method,
-// 			req.path,
-// 			after - before + 'ms'
-// 		);
-// 	});
-// 	next();
-// });
+app.use((req, res, next) => {
+	let before = Date.now();
+	res.once('finish', () => {
+		let after = Date.now();
+		console.log(
+			res.statusCode,
+			req.method,
+			req.path,
+			after - before + 'ms'
+		);
+	});
+	next();
+});
 
 app.get('/boards', (req, res) => {
 	res.status(200).json(Boards.getBoards());
