@@ -30,7 +30,7 @@ const Board = ({ board, deleteBoard, refreshBoards }) => {
 			});
 	};
 
-	const refresh = () => {
+	const refreshTasks = () => {
 		axios
 			.get(`/board/${board.id}/tasks`)
 			.then((response) => {
@@ -81,8 +81,9 @@ const Board = ({ board, deleteBoard, refreshBoards }) => {
 	};
 	return (
 		<div className="Board">
-			<p>Name: {board.name} </p>
-			<p>Board ID: {board.id} </p>
+			<p className="Board__header">
+				Board: <span>{board.name}</span>
+			</p>
 
 			<ul
 				className="Board__ul__tasks"
@@ -95,7 +96,7 @@ const Board = ({ board, deleteBoard, refreshBoards }) => {
 						task={task}
 						board={board}
 						deleteTask={deleteTask}
-						refresh={refresh}
+						refreshTasks={refreshTasks}
 					/>
 				))}
 			</ul>

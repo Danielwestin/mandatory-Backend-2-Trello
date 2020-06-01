@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 
 const uuid = require('uuid').v4;
-// const http = require('http').createServer(app);
 
 const port = require('./config.sample.json').port || 9999;
 const Boards = require('./database/BigBrain/handleBoard');

@@ -3,7 +3,7 @@ import Popup from '../Popup/Popup';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../../utilities/util';
 
-export default function Task({ task, board, deleteTask, refresh }) {
+export default function Task({ task, board, deleteTask, refreshTasks }) {
 	const [ taskInfo, setTaskInfo ] = useState(false);
 
 	const [ { isDragging }, dragRef ] = useDrag({
@@ -29,7 +29,7 @@ export default function Task({ task, board, deleteTask, refresh }) {
 					taskInfo={taskInfo}
 					setTaskInfo={setTaskInfo}
 					board={board}
-					refresh={refresh}
+					refreshTasks={refreshTasks}
 				/>
 			)}
 			<li

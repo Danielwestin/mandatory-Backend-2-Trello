@@ -16,12 +16,6 @@
 				"id": "0e230be1-6956-4471-b5a4-c9ff4d35bc38"
 			},
 			{
-				"name": "Hello",
-				"description": "",
-				"created": "2020-5-14 13:14:10",
-				"id": "c6cad7ac-a880-4fc7-b9d2-810e1557284b"
-			},
-			{
 				"name": "Bada",
 				"description": "Bada",
 				"created": "2020-5-14 13:14:21",
@@ -48,24 +42,6 @@
 		]
 	},
 	{
-		"name": "Done",
-		"id": "f6534367-7704-4192-bd12-5265336ed88f",
-		"tasks": [
-			{
-				"name": "Code",
-				"description": "code",
-				"created": "2020-5-14 13:14:23",
-				"id": "23888e07-7904-4ee1-933c-d11eb6bf00cc"
-			},
-			{
-				"name": "I am Done?",
-				"description": "I think i am done :)",
-				"created": "2020-5-25 13:39:39",
-				"id": "9ce91914-c567-4fe5-939e-e52cee958009"
-			}
-		]
-	},
-	{
 		"name": "Backend",
 		"id": "67b2d2e8-e458-4a1d-a39d-c126a5daa5f1",
 		"tasks": [
@@ -80,30 +56,48 @@
 				"description": "kåda",
 				"created": "2020-5-20 11:59:10",
 				"id": "b55ca09f-f7de-44e0-afad-22d60540ba84"
+			},
+			{
+				"name": "Banana",
+				"description": "banana",
+				"created": "2020-5-29 18:58:27",
+				"id": "5e4f237b-403f-41e0-a7f6-68016952eb7c"
+			},
+			{
+				"name": "Code",
+				"description": "",
+				"created": "2020-6-1 11:36:54",
+				"id": "648d0026-e345-40d4-a6b9-987bef2ca8db"
 			}
 		]
 	},
 	{
 		"name": "Frontend",
-		"id": "5db5cb27-ff80-4c58-afff-8236654f212e",
+		"id": "4b5d642a-906f-4a90-bbb2-76a9bf7cf870",
 		"tasks": [
 			{
-				"name": "Boat",
-				"description": "do boat stuff\n",
-				"created": "2020-6-1 10:30:34",
-				"id": "f77c7374-f428-4193-8f5c-c4d23a0277e7"
+				"name": "Code",
+				"description": "Final",
+				"created": "2020-6-1 11:24:23",
+				"id": "fff5bc1d-df08-435f-b031-f53b04688465"
 			},
 			{
-				"name": "test",
+				"name": "Code some more",
 				"description": "",
-				"created": "2020-6-1 11:9:48",
-				"id": "8d4514ad-2f5f-483a-b64f-fc3463257886"
-			},
+				"created": "2020-6-1 11:27:26",
+				"id": "45690c42-b78a-4460-b467-408bfbe651a9"
+			}
+		]
+	},
+	{
+		"name": "Done",
+		"id": "79e138d6-e2b8-4d34-bb86-9a6017a2bcbb",
+		"tasks": [
 			{
-				"name": "Banana",
+				"name": "Done",
 				"description": "",
-				"created": "2020-5-29 18:58:27",
-				"id": "5e4f237b-403f-41e0-a7f6-68016952eb7c"
+				"created": "2020-6-1 11:27:15",
+				"id": "08840b84-0d94-4681-8fda-6a0ebe548892"
 			}
 		]
 	}
