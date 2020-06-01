@@ -4,7 +4,7 @@ import Task from '../Task/Task';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../../utilities/util';
 
-const Board = ({ board, deleteBoard }) => {
+const Board = ({ board, deleteBoard, refreshBoards }) => {
 	const [ tasks, setTasks ] = useState([]);
 
 	const [ { isOver }, dropRef ] = useDrop({
@@ -23,6 +23,18 @@ const Board = ({ board, deleteBoard }) => {
 			})
 			.then((response) => {
 				console.log('Det funkar ju', response);
+				refreshBoards();
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	const refresh = () => {
+		axios
+			.get(`/board/${board.id}/tasks`)
+			.then((response) => {
+				setTasks(response.data);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -40,7 +52,7 @@ const Board = ({ board, deleteBoard }) => {
 					console.log(error);
 				});
 		},
-		[ board, tasks ]
+		[ board ]
 	);
 
 	const postTask = (e) => {
@@ -83,6 +95,7 @@ const Board = ({ board, deleteBoard }) => {
 						task={task}
 						board={board}
 						deleteTask={deleteTask}
+						refresh={refresh}
 					/>
 				))}
 			</ul>

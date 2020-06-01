@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import FocusTrap from 'focus-trap-react';
 
-export default function Popup({ task, taskInfo, setTaskInfo, board }) {
+export default function Popup({ task, taskInfo, setTaskInfo, board, refresh }) {
 	const [ updateTask, setUpdateTask ] = useState({
 		name: task.name,
 		description: task.description,
@@ -30,6 +30,7 @@ export default function Popup({ task, taskInfo, setTaskInfo, board }) {
 				.catch((error) => {
 					console.log(error);
 				});
+			refresh();
 			setTaskInfo(false);
 		}
 	};

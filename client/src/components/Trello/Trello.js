@@ -18,6 +18,17 @@ export default function Trello() {
 			});
 	}, []);
 
+	const refreshBoards = () => {
+		axios
+			.get('/boards')
+			.then((response) => {
+				setBoards(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	const set = (e) => {
 		setBoardname(e.target.value);
 	};
@@ -71,6 +82,7 @@ export default function Trello() {
 				<main className="Trello__main">
 					{boards.map((board, i) => (
 						<Board
+							refreshBoards={refreshBoards}
 							key={i}
 							board={board}
 							deleteBoard={deleteBoard}

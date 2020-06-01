@@ -31,19 +31,19 @@ app.use((req, res, next) => {
 	}
 });
 
-// app.use((req, res, next) => {
-// 	let before = Date.now();
-// 	res.once('finish', () => {
-// 		let after = Date.now();
-// 		console.log(
-// 			res.statusCode,
-// 			req.method,
-// 			req.path,
-// 			after - before + 'ms'
-// 		);
-// 	});
-// 	next();
-// });
+app.use((req, res, next) => {
+	let before = Date.now();
+	res.once('finish', () => {
+		let after = Date.now();
+		console.log(
+			res.statusCode,
+			req.method,
+			req.path,
+			after - before + 'ms'
+		);
+	});
+	next();
+});
 
 app.get('/boards', (req, res) => {
 	res.status(200).json(Boards.getBoards());
